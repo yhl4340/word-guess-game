@@ -10,7 +10,7 @@
 
        <h1>The Word Guessing Game</h1>
      <h3>Guess the name of the bands in the 80's!</h3>
-     <p>Current Word</p>
+     <p id='current-word-text'>Current Word</p>
      <p id="wordArr-text">wordarr</p>
      <p id="letter-guessed-text">Letter Guessed :</p>
      <p id="guess-left-text">Guesses Left: </p>
@@ -33,6 +33,7 @@
       var wordArr = [];
       var letterGuessed = [];
       var guessLeft = 8;
+      var currentWord = '';
 
 //instructions/prompt for user
       var start = confirm( "Ready to see how well you know your bands from the 80's ? ");
@@ -43,6 +44,7 @@
       var letterGuessedText = document.getElementById("letter-guessed-text");
       var guessLeftText = document.getElementById("guess-left-text");
       var counterText = document.getElementById("counter-text");
+      var currentWordText = document.getElementById("current-word-text");
   
 
 
@@ -63,11 +65,12 @@
           console.log(word);
           wordArrText.textContent = wordArr.join(' ');
       
+    
 
       document.onkeyup = function(event) {
         var letter = event.key;
         letterGuessed.push(letter);
-      
+
       //check if the guess matches the letter in the array. if yes, the letter will be in the exact spot.
         if(letter.length> 0) { 
           for( var k= 0; k < word.length; k ++){
@@ -83,18 +86,19 @@
             guessLeft--;
             guessLeftText.textContent = guessLeft;
             letterGuessedText.textContent = 'Letters you have guessed:' + letterGuessed.toString();
-
-                  // if(letter.length == 0){
-                  //   win++;
-                  //   pickedWordText.textContent = wordArr;
-                  //   alert ('Congrats! You won! The word was '+ wordArr);
-                  //   counterText.textContent = ' Wins: ' + win;
-                  // } else {
-                  //   alert('Sorry, try again');
-                  //   pickedWordText.textContent = wordArr;
-                  // }
+          
                 
-        };
+        
+                  //  if(letter.length == 0){
+                  //    win++;
+                  //    currentWordText.textContent = wordArr;
+                  //    alert ('Congrats! You won! The word was '+ wordArr);
+                  //    counterText.textContent = ' Wins: ' + win;
+                  //  } else {
+                  //    alert('Sorry, try again');
+                  //    currentWordText.textContent = wordArr;
+                   
+      };
      
           
             
