@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Word Guessing Game</title>
+    <style></style>
+  </head>
+  <body>
+
+
+       <h1>The Word Guessing Game</h1>
+     <h3>Guess the name of the bands in the 80's!</h3>
+     <p>Current Word</p>
+     <p id="wordArr-text">wordarr</p>
+     <p id="letter-guessed-text">Letter Guessed :</p>
+     <p id="guess-left-text">Guesses Left: </p>
+     <p id="counter-text">Win</p>
+     </div> 
+
+    <script type="text/javascript">
+      //create an arry as the word bank that comp randomly picks from
+      var words = [
+        "Aerosmith",
+        "Bon Jovi",
+        "Queen",
+        // "Journey",
+        // "Metallica",
+        // "Blondie"
+      ]; 
+//globals
+      var counter = 0;
+      var win = 0;
+      var wordArr = [];
+      var letterGuessed = [];
+      var guessLeft = 8;
+
+//instructions/prompt for user
+      var start = confirm( "Ready to see how well you know your bands from the 80's ? ");
+      var toStart = alert("Press any key to start");
+
+//to display on the screen
+      var wordArrText = document.getElementById("wordArr-text");
+      var letterGuessedText = document.getElementById("letter-guessed-text");
+      var guessLeftText = document.getElementById("guess-left-text");
+      var counterText = document.getElementById("counter-text");
+  
+
+
+      //loop through the word chosen and the number of letter should match the number of underscore
+
+        var  word = words[Math.floor(Math.random() * words.length)];
+        
+      //create a placeholder and for each letter in the chosen word will show up as underscore
+        for (var i = 0; i < word.length; i++) {
+          if (wordArr[i] === ' ') {
+            wordArr.push(' ');
+            console.log(wordArr[i]);
+          } else {
+            wordArr.push('_');
+             console.log(wordArr[i]);
+          }
+        };
+          console.log(word);
+          wordArrText.textContent = wordArr.join(' ');
+      
+
+      document.onkeyup = function(event) {
+        var letter = event.key;
+        letterGuessed.push(letter);
+      
+      //check if the guess matches the letter in the array. if yes, the letter will be in the exact spot.
+        if(letter.length> 0) { 
+          for( var k= 0; k < word.length; k ++){
+            if(word[k] == letter[k]) { 
+              alert('Yes, that is correct!');  
+              wordArr[k] = letterGuessed;
+              }
+            }  
+          }else {
+            alert('Nope, not this one. Sorry');
+          };
+          
+            guessLeft--;
+            guessLeftText.textContent = guessLeft;
+            letterGuessedText.textContent = 'Letters you have guessed:' + letterGuessed.toString();
+
+                  // if(letter.length == 0){
+                  //   win++;
+                  //   pickedWordText.textContent = wordArr;
+                  //   alert ('Congrats! You won! The word was '+ wordArr);
+                  //   counterText.textContent = ' Wins: ' + win;
+                  // } else {
+                  //   alert('Sorry, try again');
+                  //   pickedWordText.textContent = wordArr;
+                  // }
+                
+        };
+     
+          
+            
+   
+      
+          
+         
+
+        
+  
+         
+//  <------------------Pseduo codes-------------------->
+//  1--Use key events to listen for the letters that your players will type.
+//  2--Display the following on the page:
+//       Press any key to get started!
+//       Wins: (# of times user guessed the word correctly).
+//      If the word is madonna, display it like this when the game starts: _ _ _ _ _ _ _.
+//      As the user guesses the correct letters, reveal them: m a d o _  _ a.
+//  3--Number of Guesses Remaining: (# of guesses remaining for the user).
+//  4--Letters Already Guessed: (Letters the user has guessed, displayed like L Z Y H).
+//  5--After the user wins/loses the game should automatically choose another word and make the user play it.
+ 
+
+    </script>
+  </body>
+</html>
