@@ -3,19 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <title>Word Guessing Game</title>
-    <style></style>
+    <style>
+    #game-over-text,
+    #reload-text {
+      display: none;
+    
+    }
+    #game-over-text.active,
+    #reload-text.active {
+      display: block;
+      font-size: 20px;
+      font-weight: bold;
+      color:red;
+
+    }
+    </style>
   </head>
   <body>
 
 
-       <h1>The Word Guessing Game</h1>
+    <h1>The Word Guessing Game</h1>
      <h3>Guess the name of the bands in the 80's!</h3>
      <p id='current-word-text'>Current Word</p>
      <p id="wordArr-text">wordarr</p>
      <p id="letter-guessed-text">Letter Guessed :</p>
      <p id="guess-left-text">Guesses Left: </p>
      <p id="counter-text">Win</p>
-     </div> 
+     <div id="game-over-text">Game Over</div>
+     <div id="reload-text"></div>
+     
 
     <script type="text/javascript">
       //create an arry as the word bank that comp randomly picks from
@@ -45,8 +61,8 @@
       var guessLeftText = document.getElementById("guess-left-text");
       var counterText = document.getElementById("counter-text");
       var currentWordText = document.getElementById("current-word-text");
-  
-
+      var gameOverText = document.getElementById("game-over-text");
+      var reloadText = document.getElementById("reload-text");
 
       //loop through the word chosen and the number of letter should match the number of underscore
 
@@ -72,11 +88,13 @@
         letterGuessed.push(letter);
 
       //check if the guess matches the letter in the array. if yes, the letter will be in the exact spot.
+      //cant' get it to work--------->
         if(letter.length> 0) { 
           for( var k= 0; k < word.length; k ++){
             if(word[k] == letter[k]) { 
               alert('Yes, that is correct!');  
-              wordArr[k] = letterGuessed;
+              wordArr[k] = letterGuessed[k];
+              wordArrText.push(letterGuessed);
               }
             }  
           }else {
@@ -87,7 +105,11 @@
             guessLeftText.textContent = guessLeft;
             letterGuessedText.textContent = 'Letters you have guessed:' + letterGuessed.toString();
           
-                
+        if ( guessLeft === 0){
+          gameOverText.classList.add('active');
+          reloadText.classList.add('active');
+
+        };
         
                   //  if(letter.length == 0){
                   //    win++;
