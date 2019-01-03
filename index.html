@@ -24,13 +24,15 @@
 
     <h1>The Word Guessing Game</h1>
      <h3>Guess the name of the bands in the 80's!</h3>
-     <p id='current-word-text'>Current Word</p>
+     <h4>Current Word</h4>
+    
      <p id="wordArr-text">wordarr</p>
      <p id="letter-guessed-text">Letter Guessed :</p>
      <p id="guess-left-text">Guesses Left: </p>
+     <p id='incorrect-text'>Incorret letters: </p>
      <p id="counter-text">Win</p>
      <div id="game-over-text">Game Over</div>
-     <div id="reload-text"></div>
+     <div id="reload-text"></div><button id="reload" onclick="document.location.reload()">Reload</button>
      
 
     <script type="text/javascript">
@@ -49,7 +51,7 @@
       var wordArr = [];
       var letterGuessed = [];
       var guessLeft = 8;
-      var currentWord = '';
+      var incorrect = [];
 
 //instructions/prompt for user
       var start = confirm( "Ready to see how well you know your bands from the 80's ? ");
@@ -60,7 +62,7 @@
       var letterGuessedText = document.getElementById("letter-guessed-text");
       var guessLeftText = document.getElementById("guess-left-text");
       var counterText = document.getElementById("counter-text");
-      var currentWordText = document.getElementById("current-word-text");
+      var incorrectText = document.getElementById("incorrect-text");
       var gameOverText = document.getElementById("game-over-text");
       var reloadText = document.getElementById("reload-text");
 
@@ -86,21 +88,32 @@
       document.onkeyup = function(event) {
         var letter = event.key;
         letterGuessed.push(letter);
+        console.log(letter);
 
       //check if the guess matches the letter in the array. if yes, the letter will be in the exact spot.
       //cant' get it to work--------->
         if(letter.length> 0) { 
-          for( var k= 0; k < word.length; k ++){
-            if(word[k] == letter[k]) { 
+          for( var k= 0; k < word.length; k++){
+            console.log((word[k] == letter));
+            if(word[k] == letter) { 
               alert('Yes, that is correct!');  
-              wordArr[k] = letterGuessed[k];
-              wordArrText.push(letterGuessed);
-              }
+              
+              wordArr[k] = letter;   
+              console.log(wordArr);
             }  
+              } 
           }else {
-            alert('Nope, not this one. Sorry');
+            if( word[k] !== letter) {
+              alert('Nope, not this one. Sorry');
+              incorrect.push(letter);
+
+              console.log(incorrectText);
+             
+            }
+            
           };
-          
+            incorrectText.textContent = 'Letters you have guessed incorrectly: '+ letterGuessed.toString();
+            wordArrText.textContent = wordArr.join(' ');
             guessLeft--;
             guessLeftText.textContent = guessLeft;
             letterGuessedText.textContent = 'Letters you have guessed:' + letterGuessed.toString();
