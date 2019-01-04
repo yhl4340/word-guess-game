@@ -66,35 +66,34 @@
       var gameOverText = document.getElementById("game-over-text");
       var reloadText = document.getElementById("reload-text");
 
-      //loop through the word chosen and the number of letter should match the number of underscore
-
-        var  word = words[Math.floor(Math.random() * words.length)];
+//loop through the word chosen and the number of letter should match the number of underscore
+      var  word = words[Math.floor(Math.random() * words.length)];
         
-      //create a placeholder and for each letter in the chosen word will show up as underscore
-        for (var i = 0; i < word.length; i++) {
-          if (wordArr[i] === ' ') {
-            wordArr.push(' ');
-            console.log(wordArr[i]);
-          } else {
-            wordArr.push('_');
-             console.log(wordArr[i]);
+//create a placeholder and for each letter in the chosen word will show up as underscore
+      for (var i = 0; i < word.length; i++) {
+        if (wordArr[i] === ' ') {
+          wordArr.push(' ');
+          console.log(wordArr[i]);
+        } else {
+          wordArr.push('_');
+          console.log(wordArr[i]);
           }
         };
           console.log(word);
           wordArrText.textContent = wordArr.join(' ');
       
     
-
+//onkeyup function
       document.onkeyup = function(event) {
-      //only letters entered will be printed to DOM
+//only letters entered will be printed to DOM
         var letter = event.key; 
         if(event.keyCode >= 65 && event.keyCode <= 90){
         letterGuessed.push(letter);
         console.log(letter);
         
     
-      //check if the guess matches the letter in the array. if yes, the letter will be in the exact spot.
-      //cant' get it to work--------->
+//check if the guess matches the letter in the array. if yes, the letter will be in the exact spot.
+ 
         if(letter.length> 0) { 
           for( var k= 0; k < word.length; k++){
           console.log((word[k] == letter));
@@ -104,49 +103,37 @@
               console.log(wordArr);
                   }
                 }
-              }else { 
-                if (letter !== wordArr){
-                  incorrect.push(letter);  incorrectText.textContent = 'Letters you have guessed incorrectly: '+ incorrect.toString;
+              }else { //incorrect not working...................................
+                if (letter !== word[k]){
+                  incorrect.push(letter);  
                 console.log(incorrect);
                 }
               };
               
               };
-              
-        
-          
-
-            
             wordArrText.textContent = wordArr.join(' ');
             guessLeft--;
             guessLeftText.textContent = guessLeft;
             letterGuessedText.textContent = 'Letters you have guessed:' + letterGuessed.toString();
-          
-        if ( guessLeft === 0){
+            incorrectText.textContent = 'Letters you have guessed incorrectly: '+ incorrect.toString();
+//gameover and reload
+        if ( guessLeft == 0 || letter.length == 0){               
           gameOverText.classList.add('active');
           reloadText.classList.add('active');
-
         };
         
-                  //  if(letter.length == 0){
-                  //    win++;
-                  //    currentWordText.textContent = wordArr;
-                  //    alert ('Congrats! You won! The word was '+ wordArr);
-                  //    counterText.textContent = ' Wins: ' + win;
-                  //  } else {
-                  //    alert('Sorry, try again');
-                  //    currentWordText.textContent = wordArr;
-                   
-      
-      };//end of on click fx;
-          
-            
-   
-      
-          
-         
-
         
+        //            if(letter.length == 0){
+        //              win++;
+        //              counterText.textContent = wordArr;
+        //              alert ('Congrats! You won! The word was '+ wordArr);
+        //              counterText.textContent = ' Wins: ' + win;
+        //            } else {
+        //              alert('Sorry, try again');
+        //              counterText.textContent = wordArr;
+                   
+        //            }
+      };//end of on click fx;
   
          
 //  <------------------Pseduo codes-------------------->
