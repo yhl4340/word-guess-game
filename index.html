@@ -5,15 +5,22 @@
     <title>Word Guessing Game</title>
     <style>
       #game-over-text,
-      #reload-text {
+      #reload-text,
+      #ans {
         display: none;
       }
       #game-over-text.active,
-      #reload-text.active {
+      #reload-text.active,
+       {
         display: block;
         font-size: 20px;
         font-weight: bold;
         color: red;
+      }
+      #ans.active{
+        font-size: 18px;
+        color:blue;
+        
       }
     </style>
   </head>
@@ -28,6 +35,7 @@
     <p id="incorrect-text">Incorret letters:</p>
     <p id="counter-text">Win</p>
     <div id="game-over-text">Game Over</div>
+    <div id='ans'></div>
     <div id="reload-text"></div>
     <button id="reload" onclick="document.location.reload()">Reload</button>
 
@@ -63,7 +71,7 @@
       var incorrectText = document.getElementById("incorrect-text");
       var gameOverText = document.getElementById("game-over-text");
       var reloadText = document.getElementById("reload-text");
-
+      var ansText = document.getElementById("ans");
       //loop through the word chosen and the number of letter should match the number of underscore
       var word = words[Math.floor(Math.random() * words.length)];
 
@@ -117,8 +125,12 @@
 
     //gameover and reload
         if (guessLeft == 0 || letter.length == 0) {
+          ansText.textContent= 'The word was ' + word;
+        
+          ansText.classList.add('active');
           gameOverText.classList.add("active");
           reloadText.classList.add("active");
+
         }
 
         //            if(letter.length == 0){
