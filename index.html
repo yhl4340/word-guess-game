@@ -9,34 +9,7 @@
 
   <!-- //bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
- 
-</head>
-<body>
-    
-  
-    <style>
-      #game-over-text,
-      #ans {
-        display: none;
-      }
-      #game-over-text.active,
-      #reload.active,
-       {
-        display: block;
-        font-size: 20px;
-        font-weight: bold;
-        color: red;
-      }
-      #ans.active{
-        font-size: 18px;
-        color:blue;
-        display: block;
-      }
-      button{
-        display: none;
-      }
-    </style>
-
+  <link rel="stylesheet" type="text/css" href="style.css">
     
   </head>
   <body>
@@ -46,20 +19,18 @@
   
 
     <!-- //bootstrap -->
-    <div class="card" style="width: 18rem;">
-    
-        <p class="card-text">Current Word</p>
-        <div class="card" style="width: 18rem;">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item" id="wordArr-text" style="white-space: pre">wordarr</li>
-            <li class="list-group-item" id="letter-guessed-text">Letter Guessed :</li>
-            <li class="list-group-item" id="guess-left-text">Guesses Left: </li>
-            <li class="list-group-item" id="incorrect-text">Incorret letters: </li>
-            <li class="list-group-item" id="counter-text">Win: </li>
-            <li class="list-group-item" id="game-over-text">Game Over</li>
-            <li class="list-group-item" id='ans'></li>
-        
-           
+    <div class="card" style="width: 18rem; margin-left: 540px;">
+      
+          <p class="card-text">Current Word</p>
+          <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="wordArr-text">wordarr</li>
+              <li class="list-group-item" id="letter-guessed-text">Letter Guessed :</li>
+              <li class="list-group-item" id="guess-left-text">Guesses Left: </li>
+              <li class="list-group-item" id="counter-text">Win: </li>
+              <li class="list-group-item" id="losses-text">Losses: </li>
+              <li class="list-group-item" id="game-over-text">Game Over</li>
+              <li class="list-group-item" id='ans'></li>
           </ul>
         </div>
       </div>
@@ -69,20 +40,19 @@
     <script type="text/javascript">
       //create an arry as the word bank that comp randomly picks from
       var words = [
-        // "Aerosmith",
+        "Aerosmith",
         "Bon Jovi",
         "Queen"
-        // "Journey",
-        // "Metallica",
-        // "Blondie"
+         "Journey",
+         "Metallica",
+         "Blondie"
       ];
       //globals
-      var counter = 0;
+      var loss = 0;
       var win = 0;
       var wordArr = [];
       var letterGuessed = [];
       var guessLeft = 8;
-      var incorrect = [];
       var gameRunning = true;
       var gameStop = true;
 
@@ -101,13 +71,15 @@
       var gameOverText = document.getElementById("game-over-text");
       var reloadText = document.getElementById("reload");
       var ansText = document.getElementById("ans");
+      var lossesText = document.getElementById("losses-text");
+
 
       //loop through the word chosen and the number of letter should match the number of underscore
       var word = words[Math.floor(Math.random() * words.length)];
 
       //create a placeholder and for each letter in the chosen word will show up as underscore
       for (var i = 0; i < word.length; i++) {
-        if (wordArr[i] === " ") {
+        if (wordArr[i] == " ") {
           wordArr.push(" ");
           console.log(wordArr[i]);
         } else {
@@ -135,15 +107,14 @@
               if (word[k].toLowerCase() === letter.toLowerCase()) {
                 alert("Yes, that is correct!");
                 wordArr[k] = letter;
-                console.log(wordArr); 
+                console.log(wordArr[k]); 
                 }
               }
               }else {
       //incorrect not working...................................
-              incorrect[k]= letter;
+              incorrect.push(letter);
               console.log(incorrect);
               };
-          
         
         guessLeft--;
         wordArrText.textContent = wordArr.join(" ");
@@ -153,23 +124,19 @@
 
     //gameover and reload
      
-        // if(wordArr.join('')=== word.join('')){
-        //       win++;
-        //       alert ('Congrats! You won! The word was '+ wordArr);
-         
-        //   } else {
-        //       alert('Sorry, try again');
-             
-        //     }
-         
-
-        if (guessLeft === 0) {
-          ansText.textContent= 'The word was ' + word;
-          ansText.classList.add("active");
-          gameOverText.classList.add("active");
-          reloadText.classList.add("active");
-        };
-           
+        if(guessLeft == 0 || letter.length == 0) {
+              win++;
+              gameOverText.classList.add("active");
+              reloadText.classList.add("active");
+              return 'Congrats! You won! The word was '+ wordArr;
+          } else { 
+            loss++;
+            return 'Sorry, try again. The word was ' + wordArr;
+            gameOverText.classList.add("active");
+            reloadText.classList.add("active");
+            };
+           counterText.textContent = win;
+           lossesText.textContent = loss;
       }; //end of on click fx;
 
       //  <------------------Pseduo codes-------------------->
