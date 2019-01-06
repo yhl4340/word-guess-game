@@ -5,9 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Word Guessing Game</title>
+  <title>Word Guess Game</title>
 
   <!-- //bootstrap -->
+  <link rel="stylesheet" type="text/css" href="style.css/reset.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="style.css">
     
@@ -54,7 +55,7 @@
       var wordArr = [];
       var letterGuessed = [];
       var guessLeft = 8;
-     
+      var incorrect = '';
       var gameRunning = true;
       var gameStop = true;
 
@@ -126,19 +127,30 @@
 
     //gameover and reload
      
-        if(guessLeft == 0 || letter.length == 0) {
-              win++;
-              gameOverText.classList.add("active");
-              reloadText.classList.add("active");
-              return 'Congrats! You won! The word was '+ wordArr;
-          } else { 
-            loss++;
-            return 'Sorry, try again. The word was ' + wordArr;
-            gameOverText.classList.add("active");
-            reloadText.classList.add("active");
-            };
-           counterText.textContent = win;
-           lossesText.textContent = loss;
+        // if(guessLeft === 0) {
+        //   if (letter === 0) {
+        //       win++;
+        //       gameOverText.classList.add("active");
+        //       reloadText.classList.add("active");
+        //       counterText.textContent = win;
+        //       return 'Congrats! You won! The word was '+ wordArr;
+        //   } else { 
+        //     loss++;
+        //     return 'Sorry, try again. The word was ' + wordArr;
+        //     gameOverText.classList.add("active");
+        //     reloadText.classList.add("active");
+        //     lossesText.textContent = loss;
+        //     };
+        //   };
+           
+        if(guessLeft == 0){
+          gameOverText.classList.add("active");
+          reloadText.classList.add("active");
+          ansText.classList.add("active");
+          ansText.textContent = "The word was " + word;
+          
+        };
+           
       }; //end of on click fx;
 
       //  <------------------Pseduo codes-------------------->
