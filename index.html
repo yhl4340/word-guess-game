@@ -27,6 +27,7 @@
               <li class="list-group-item" id="wordArr-text">wordarr</li>
               <li class="list-group-item" id="letter-guessed-text">Letter Guessed :</li>
               <li class="list-group-item" id="guess-left-text">Guesses Left: </li>
+              <li class="list-group-item" id="incorrect-text">Incorret letters: </li>
               <li class="list-group-item" id="counter-text">Win: </li>
               <li class="list-group-item" id="losses-text">Losses: </li>
               <li class="list-group-item" id="game-over-text">Game Over</li>
@@ -42,10 +43,10 @@
       var words = [
         "Aerosmith",
         "Bon Jovi",
-        "Queen"
-         "Journey",
-         "Metallica",
-         "Blondie"
+        "Queen",
+       "Journey",
+       "Metallica",
+        "Blondie"
       ];
       //globals
       var loss = 0;
@@ -53,6 +54,7 @@
       var wordArr = [];
       var letterGuessed = [];
       var guessLeft = 8;
+     
       var gameRunning = true;
       var gameStop = true;
 
