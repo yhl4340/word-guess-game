@@ -8,7 +8,7 @@
   <title>Word Guess Game</title>
 
   <!-- //bootstrap -->
-  <link rel="stylesheet" type="text/css" href="style.css/reset.css">
+  <link rel="stylesheet" type="text/css" href="assets/style.css/reset.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="style.css">
     
@@ -54,8 +54,8 @@
       var win = 0;
       var wordArr = [];
       var letterGuessed = [];
-      var guessLeft = 8;
-      var incorrect = '';
+      var guessLeft = 10;
+      var incorrect = [];
       var gameRunning = true;
       var gameStop = true;
 
@@ -105,19 +105,26 @@
       //check if the guess matches the letter in the array. if yes, the letter will be in the exact spot.
 
          if (letter.length > 0) {
+           var isCorrect = false;
             for (var k = 0; k < word.length; k++) {
               console.log(word[k] == letter);
               if (word[k].toLowerCase() === letter.toLowerCase()) {
+                isCorrect=  true;
                 alert("Yes, that is correct!");
                 wordArr[k] = letter;
                 console.log(wordArr[k]); 
-                }
               }
-              }else {
-      //incorrect not working...................................
-              incorrect.push(letter);
+            }
+      //incorrect not working..................................
+          
+              if(isCorrect){
+                letterGuessed.push(letter);
+              }else{
+                incorrect.push(letter);
               console.log(incorrect);
               };
+         
+          };
         
         guessLeft--;
         wordArrText.textContent = wordArr.join(" ");
